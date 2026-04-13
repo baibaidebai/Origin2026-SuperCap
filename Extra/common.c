@@ -215,6 +215,10 @@ void Get_Value(void) {
 void PID_Calc(void) {
   IBuckIn_REF = POWER_LIMIT / VMonitorIn - ILoad;
 
+  float VScap_safe = VScap > 1.0f ? VScap : 1.0f;
+  float IScap_power_lim = POWER_LIMIT / VScap_safe;
+  IScap_REF = IScap_power_lim < Max_IScap ? IScap_power_lim : Max_IScap;
+
   if (VScap < 6.0f)
     VScap_Low = 1;
   else if (VScap > 10.0f)
