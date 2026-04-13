@@ -328,8 +328,8 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) {
     POWER_BUFFER =
         ((uint16_t)can_rxdata[4] | ((uint16_t)can_rxdata[5] << 8)) / 100.f;
 
-    if (POWER_LIMIT < 30.0f)
-      POWER_LIMIT = 30.0f;
+    if (POWER_LIMIT < 15.0f)
+      POWER_LIMIT = 15.0f;
     else if (POWER_LIMIT > 140.0f)
       POWER_LIMIT = 140.0f;
 
