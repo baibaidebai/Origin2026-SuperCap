@@ -216,6 +216,10 @@ void PID_Calc(void) {
   IBuckIn_REF = POWER_LIMIT / VMonitorIn - ILoad;
 
   float VScap_safe = VScap > 1.0f ? VScap : 1.0f;
+  float power_margin =
+      POWER_LIMIT - 10.0f; // 计算剩余功率 这里直接减静态功耗以避免波动
+  if (power_margin < 0.0f)
+    power_margin = 0.0f;
   float IScap_power_lim = POWER_LIMIT / VScap_safe;
   IScap_REF = IScap_power_lim < Max_IScap ? IScap_power_lim : Max_IScap;
 
