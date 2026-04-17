@@ -187,7 +187,7 @@ void Para_Init(void) {
   pid_init(&PID_VBuckOut, 100.0f, 20.0f, 0);
 
   PWM = 44000;
-  POWER_LIMIT = 40; // Default 40W
+  POWER_LIMIT = 16.50f; // Default 40W
   IScap_REF = Max_IScap;
   IBuckIn_REF = POWER_LIMIT / VMonitorIn - ILoad;
   //	VScap_REF=Max_VScap;
@@ -217,7 +217,7 @@ void PID_Calc(void) {
 
   float VScap_safe = VScap > 1.0f ? VScap : 1.0f;
   float power_margin =
-      POWER_LIMIT - 10.0f; // 计算剩余功率 这里直接减静态功耗以避免波动
+      POWER_LIMIT - 15.0f; // 计算剩余功率 这里直接减静态功耗以避免波动
   if (power_margin < 0.0f)
     power_margin = 0.0f;
   float IScap_power_lim = POWER_LIMIT / VScap_safe;
